@@ -145,8 +145,6 @@ NPM_BIN_PATH = "C:/Users/user/AppData/Roaming/npm/npm.cmd"
 CSRF_COOKIE_DOMAIN = ".pearse.dev"
 SESSION_COOKIE_DOMAIN = ".pearse.dev"
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-CSRF_COOKIE_SECURE = True  # Ensure cookies are only sent over HTTPS
-SESSION_COOKIE_SECURE = True  # Same for session cookies
 
-CSRF_COOKIE_HTTPONLY = True
-SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SAMESITE = 'Lax'  # Or 'Strict'
+SESSION_COOKIE_SAMESITE = 'Lax'  # Or 'Strict'
