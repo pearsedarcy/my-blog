@@ -141,3 +141,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 TAILWIND_APP_NAME = "theme"
 
 NPM_BIN_PATH = "C:/Users/user/AppData/Roaming/npm/npm.cmd"
+
+CSRF_COOKIE_DOMAIN = ".pearse.dev"
+SESSION_COOKIE_DOMAIN = ".pearse.dev"
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_HTTPONLY = True
