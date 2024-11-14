@@ -21,3 +21,4 @@ class CommentAdmin(admin.ModelAdmin):
     raw_id_fields = ("author",)
     date_hierarchy = "created"
     ordering = ("created",)
+    approved = ("Approved",)

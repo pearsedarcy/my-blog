@@ -35,7 +35,7 @@
   <!-- Comments Section -->
   <div class="mb-8">
     <h3 class="text-xl font-semibold mb-4">Comments</h3>
-    {% for comment in comments %}
+    {% for comment in comments %} {% if comment.approved == True %}
     <div class="card bg-base-300 shadow-lg p-2 mb-4">
       <div class="card-body">
         <p><strong>{{ comment.author.username }}</strong> said:</p>
@@ -62,7 +62,7 @@
     </div>
     {% empty %}
     <p class="text-center text-neutral-600">No comments yet.</p>
-    {% endfor %}
+    {% endif %} {% endfor %}
   </div>
 
   <!-- Comment Form -->
