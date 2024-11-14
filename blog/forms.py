@@ -25,6 +25,7 @@ class PostForm(forms.ModelForm):
         fields = [
             "title",
             "body",
+            "exerpt",
             "cover_image",
             "status",
         ]  # Excluding 'slug' and 'author' since these will be handled automatically

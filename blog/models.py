@@ -11,10 +11,12 @@ class Post(models.Model):
     slug = models.SlugField(unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
+    exerpt = models.TextField(max_length=100, default="", required=False)
     cover_image = models.ImageField(upload_to="cover_images/", blank=True, null=True)
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=True)
+    
 
     class Meta:
         ordering = ("-created",)
