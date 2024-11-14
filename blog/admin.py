@@ -12,7 +12,7 @@ class PostAdmin(admin.ModelAdmin):
     raw_id_fields = ("author",)
     date_hierarchy = "created"
     ordering = ("created",)
-    status = ("status",)
+    status = ("Published",)
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
@@ -21,4 +21,3 @@ class CommentAdmin(admin.ModelAdmin):
     raw_id_fields = ("author",)
     date_hierarchy = "created"
     ordering = ("created",)
-    status = ("status",)
