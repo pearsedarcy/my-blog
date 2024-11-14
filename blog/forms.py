@@ -34,7 +34,7 @@ class PostForm(forms.ModelForm):
         widget=forms.Textarea(
             attrs={
                 "rows": 6,
-                "placeholder": "Add a comment...",
+                "placeholder": "Write your post...",
                 "class": "textarea textarea-bordered w-full textarea-secondary",
             }
         ),
@@ -67,7 +67,7 @@ class PostForm(forms.ModelForm):
                 "class": "textarea textarea-bordered w-full textarea-secondary",
             }
         ),
-        label="Exerpt",
+        label="",
     )
     status = forms.BooleanField(
         required=False,
