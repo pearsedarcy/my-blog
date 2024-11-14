@@ -16,7 +16,7 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ("post", "author", "created", "updated")
+    list_display = ("approved", "body", "post", "author", "created", "updated")
     search_fields = ("author", "body")
     raw_id_fields = ("author",)
     date_hierarchy = "created"
