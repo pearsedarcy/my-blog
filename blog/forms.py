@@ -26,6 +26,7 @@ class PostForm(forms.ModelForm):
             "title",
             "body",
             "cover_image",
+            "status",
         ]  # Excluding 'slug' and 'author' since these will be handled automatically
 
     body = forms.CharField(
@@ -55,4 +56,12 @@ class PostForm(forms.ModelForm):
             }
         ),
         label="Cover Image",
+    )
+    status = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(
+            attrs={
+                "class": "checkbox checkbox-secondary",
+        }),
+        label="Publish",
     )
