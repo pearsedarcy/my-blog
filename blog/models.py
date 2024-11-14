@@ -22,7 +22,7 @@ class Post(models.Model):
         ordering = ("-created",)
 
     def __str__(self):
-        return f"{self.title | self.author.username}"
+        return f"{self.title} | {self.author.username}"
 
 
 class Comment(models.Model):
