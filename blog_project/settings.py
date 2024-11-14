@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+import dj_database_url
+from dotenv import load_dotenv
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-0jk^k1ye-s)f1mxz_8%)=$$mv7tl%s69j_17r!szk%z&3_n%2-"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['.herokuapp.com', '.pearse.dev', '127.0.0.1' ]
 
@@ -81,11 +85,15 @@ WSGI_APPLICATION = "blog_project.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+#DATABASES = {
+#    "default": {
+#        "ENGINE": "django.db.backends.sqlite3",
+#        "NAME": BASE_DIR / "db.sqlite3",
+#    }
+#}
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
 
 
@@ -122,8 +130,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "theme/static"]  # Add other paths as needed
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -148,3 +154,5 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CSRF_COOKIE_SAMESITE = 'Lax'  # Or 'Strict'
 SESSION_COOKIE_SAMESITE = 'Lax'  # Or 'Strict'
+
+CSRF_TRUSTED_ORIGINS = ['https://*.herokuapp.com', 'https://*.pearse.dev', 'http://127.0.0.1']

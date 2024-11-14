@@ -1,0 +1,4 @@
+.env
+_pycache_
+.github/
+node_modules/
