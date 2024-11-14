@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-0jk^k1ye-s)f1mxz_8%)=$$mv7tl%s69j_17r!szk%z&3_n%2-"
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -156,3 +156,4 @@ CSRF_COOKIE_SAMESITE = 'Lax'  # Or 'Strict'
 SESSION_COOKIE_SAMESITE = 'Lax'  # Or 'Strict'
 
 CSRF_TRUSTED_ORIGINS = ['https://*.herokuapp.com', 'https://*.pearse.dev', 'http://127.0.0.1']
+
