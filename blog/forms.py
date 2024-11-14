@@ -58,6 +58,17 @@ class PostForm(forms.ModelForm):
         ),
         label="Cover Image",
     )
+    exerpt = forms.CharField(
+        required=False,
+        widget=forms.Textarea(
+            attrs={
+                "rows": 3,
+                "placeholder": "Exerpt",
+                "class": "textarea textarea-bordered w-full textarea-secondary",
+            }
+        ),
+        label="Exerpt",
+    )
     status = forms.BooleanField(
         required=False,
         widget=forms.CheckboxInput(
