@@ -32,9 +32,13 @@ class Comment(models.Model):
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     approved = models.BooleanField(default=False)
-
     class Meta:
-        ordering = ["created"]
+        ordering = ["approved", "created"]
 
     def __str__(self):
-        return f"Comment by {self.author.username} on {self.post.title}"
+        return f"{self.approved} Comment by {self.author.username} on {self.post.title}"
+
+    def approved_status(self):
+        return self.approved
+    approved_status.boolean = True
+    approved_status.short_description = 'Approved'
