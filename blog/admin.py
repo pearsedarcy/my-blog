@@ -6,14 +6,15 @@ from django_summernote.admin import SummernoteModelAdmin
 
 @admin.register(Post)
 class PostAdmin(SummernoteModelAdmin):
-    list_display = ("title", "slug", "author", "created", "updated")
+    list_display = ("published", "title", "slug", "author", "created", "updated")
     search_fields = ("title", "body")
     prepopulated_fields = {"slug": ("title",)}
     raw_id_fields = ("author",)
     date_hierarchy = "created"
     ordering = ("created",)
-    status = ("Published",)
+    published = ("Published",)
     summernote_fields = ('body',)
+    list_filter = ("published",)
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
@@ -23,3 +24,4 @@ class CommentAdmin(admin.ModelAdmin):
     date_hierarchy = "created"
     ordering = ("created",)
     approved = ("Approved",)
+    list_filter = ("approved",)
