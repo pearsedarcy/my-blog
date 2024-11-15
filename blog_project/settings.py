@@ -10,13 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
+import sys
 from pathlib import Path
 import dj_database_url
-from dotenv import load_dotenv
-load_dotenv()
-#import environ
-#env = environ.Env()
-#env.read_env()  # Reads the .env file
+import environ
+env = environ.Env()
+env.read_env()  # Reads the .env file
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,7 +34,7 @@ SECRET_KEY = "lsJCLOxI5bYa1yyLME8rqA"
 #print("SECRET_KEY from env:", env('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['.herokuapp.com', '.pearse.dev', '127.0.0.1' ]
 
@@ -93,16 +92,15 @@ WSGI_APPLICATION = "blog_project.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-#DATABASES = {
-#    "default": {
-#        "ENGINE": "django.db.backends.sqlite3",
-#        "NAME": BASE_DIR / "db.sqlite3",
-#    }
-#}
-
 DATABASES = {
     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
+
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'test_db.sqlite3',
+    }
 
 
 # Password validation
@@ -156,6 +154,8 @@ TAILWIND_APP_NAME = "theme"
 
 NPM_BIN_PATH = "C:/Users/user/AppData/Roaming/npm/npm.cmd"
 
+
+# Cookie settings
 if DEBUG:
     CSRF_COOKIE_DOMAIN = "127.0.0.1"
     SESSION_COOKIE_DOMAIN = "127.0.0.1"
@@ -170,12 +170,9 @@ SESSION_COOKIE_SAMESITE = 'Lax'  # Or 'Strict'
 
 CSRF_TRUSTED_ORIGINS = ['https://*.herokuapp.com', 'https://*.pearse.dev', 'http://127.0.0.1']
 
-if DEBUG:
-    CSRF_COOKIE_SECURE = False
-    SESSION_COOKIE_SECURE = False
-else:
-    CSRF_COOKIE_SECURE = True
-    SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = not DEBUG
+SESSION_COOKIE_SECURE = not DEBUG
 
 CSRF_COOKIE_HTTPONLY = True
 CSRF_COOKIE_NAME = "csrftoken"
+
