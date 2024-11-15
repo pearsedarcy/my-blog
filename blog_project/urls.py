@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from blog import views
 from django.contrib.auth.views import LoginView, LogoutView
 from blog.models import Post
@@ -40,6 +40,7 @@ urlpatterns = [
     path("login/", views.loginView, name="login"),
     # path("profile/", views.ProfileView.as_view(), name="profile"),
     # path("logout/", views.LogoutView.as_view(), name="logout"),
+    path("summernote/", include("django_summernote.urls")),
 ]
 
 
