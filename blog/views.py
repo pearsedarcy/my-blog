@@ -98,7 +98,7 @@ def add_post(request):
     else:
         form = PostForm()
 
-    return render(request, "add_post.html", {"form": form})
+    return render(request, "blog/add_post.html", {"form": form})
 
 
 @login_required

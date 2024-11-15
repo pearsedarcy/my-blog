@@ -14,7 +14,9 @@ from pathlib import Path
 import dj_database_url
 from dotenv import load_dotenv
 load_dotenv()
-
+#import environ
+#env = environ.Env()
+#env.read_env()  # Reads the .env file
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,10 +26,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+
+SECRET_KEY = "lsJCLOxI5bYa1yyLME8rqA" 
+
+
+
+#SECRET_KEY = env('SECRET_KEY')
+#print("SECRET_KEY from env:", env('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['.herokuapp.com', '.pearse.dev', '127.0.0.1' ]
 
@@ -148,8 +156,13 @@ TAILWIND_APP_NAME = "theme"
 
 NPM_BIN_PATH = "C:/Users/user/AppData/Roaming/npm/npm.cmd"
 
-CSRF_COOKIE_DOMAIN = ".pearse.dev"
-SESSION_COOKIE_DOMAIN = ".pearse.dev"
+if DEBUG:
+    CSRF_COOKIE_DOMAIN = "127.0.0.1"
+    SESSION_COOKIE_DOMAIN = "127.0.0.1"
+else:
+    CSRF_COOKIE_DOMAIN = ".pearse.dev"
+    SESSION_COOKIE_DOMAIN = ".pearse.dev"
+
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CSRF_COOKIE_SAMESITE = 'Lax'  # Or 'Strict'
@@ -157,3 +170,12 @@ SESSION_COOKIE_SAMESITE = 'Lax'  # Or 'Strict'
 
 CSRF_TRUSTED_ORIGINS = ['https://*.herokuapp.com', 'https://*.pearse.dev', 'http://127.0.0.1']
 
+if DEBUG:
+    CSRF_COOKIE_SECURE = False
+    SESSION_COOKIE_SECURE = False
+else:
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+
+CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_NAME = "csrftoken"

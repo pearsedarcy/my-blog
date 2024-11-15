@@ -32,6 +32,8 @@ class Comment(models.Model):
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     approved = models.BooleanField(default=False)
+    
+    
     class Meta:
         ordering = ["approved", "created"]
 
