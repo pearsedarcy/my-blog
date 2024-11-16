@@ -27,7 +27,7 @@ class PostForm(forms.ModelForm):
             "body",
             "exerpt",
             "cover_image",
-            "status",
+            "published",
         ]  # Excluding 'slug' and 'author' since these will be handled automatically
 
     body = forms.CharField(
@@ -69,7 +69,7 @@ class PostForm(forms.ModelForm):
         ),
         label="",
     )
-    status = forms.BooleanField(
+    published = forms.BooleanField(
         required=False,
         widget=forms.CheckboxInput(
             attrs={
