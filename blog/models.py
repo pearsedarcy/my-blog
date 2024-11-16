@@ -15,7 +15,7 @@ class Post(models.Model):
     cover_image = models.ImageField(upload_to="cover_images/", blank=True, null=True)
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
-    status = models.BooleanField(default=True)
+    published = models.BooleanField(default=True)
     
 
     class Meta:
