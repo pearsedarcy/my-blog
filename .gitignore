@@ -2,3 +2,5 @@
 _pycache_
 .github/
 node_modules/
+__pycache__/
+.htmlhintrc
