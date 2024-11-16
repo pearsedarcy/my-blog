@@ -3,6 +3,7 @@ from slugify import slugify
 from .models import Post, Comment
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.core.paginator import Paginator
 
 # views.py
 from .forms import CommentForm, PostForm
@@ -10,7 +11,10 @@ from .forms import CommentForm, PostForm
 
 # Create your views here.
 def post_list(request):
-    posts = Post.objects.all()
+    posts_list = Post.objects.all()
+    paginator = Paginator(posts_list, 6)  # Show 6 posts per page
+    page_number = request.GET.get('page')
+    posts = paginator.get_page(page_number)
     return render(request, "blog/post_list.html", {"posts": posts})
 
 

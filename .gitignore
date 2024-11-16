@@ -4,3 +4,4 @@ _pycache_
 node_modules/
 __pycache__/
 .htmlhintrc
+blog/fixtures/

@@ -1,0 +1,62 @@
+[
+{
+    "model": "blog.post",
+    "pk": 1,
+    "fields": {
+        "title": "First post with postgres DB",
+        "slug": "first-post-with-postgres-db",
+        "author": 1,
+        "body": "Yeah so after fucking around for ages this morning I finally managed to follow one step and deploy the blog app to heroku connected to a postgres instance. That's neat tbf. Lets see if the images work. So Look, It works pretty well. The DB is connected and working accross production and dev. Probably would want to have a dev db as updating the live one in prod would not be a good idea",
+        "exerpt": "",
+        "cover_image": "",
+        "created": "2024-11-14T12:59:19Z",
+        "updated": "2024-11-15T18:51:09.572Z",
+        "published": true
+    }
+},
+{
+    "model": "blog.post",
+    "pk": 2,
+    "fields": {
+        "title": "Now lets see if this works",
+        "slug": "now-lets-see-if-this-works",
+        "author": 1,
+        "body": "asd",
+        "exerpt": "",
+        "cover_image": "",
+        "created": "2024-11-14T13:31:12Z",
+        "updated": "2024-11-15T18:43:41.339Z",
+        "published": true
+    }
+},
+{
+    "model": "blog.post",
+    "pk": 3,
+    "fields": {
+        "title": "asdf",
+        "slug": "asdf",
+        "author": 1,
+        "body": "asdf",
+        "exerpt": "",
+        "cover_image": "",
+        "created": "2024-11-14T13:31:21.045Z",
+        "updated": "2024-11-16T14:55:40.879Z",
+        "published": true
+    }
+},
+{
+    "model": "blog.post",
+    "pk": 5,
+    "fields": {
+        "title": "Summer Notes",
+        "slug": "summer-notes",
+        "author": 1,
+        "body": "<p><span style=\"font-family: &quot;Comic Sans MS&quot;;\">﻿<b>NOW THIS IS ONE UGLE POST</b></span></p><p><span style=\"font-family: Helvetica;\">﻿</span><span style=\"font-family: &quot;Comic Sans MS&quot;;\"><b><br></b></span>Hell yeah brother!</p><p><br></p><p><u>Wlike this?</u></p>",
+        "exerpt": "",
+        "cover_image": "cover_images/name_zBXpZKl.jpeg",
+        "created": "2024-11-15T18:35:34Z",
+        "updated": "2024-11-15T18:37:03.945Z",
+        "published": true
+    }
+}
+]
