@@ -1,13 +1,10 @@
-{% extends "blog/base.html" %} {% block title %}{{ post.title }}{% endblock %}
+{% extends "blog/base.html" %}
+{% block title %}Blog Posts{% endblock %}
 {% block content %}
 <div class="container mx-auto mt-8 px-4">
-  <div
-    class="masonry-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-  >
-    {% for post in posts %} {% if post.published == 1 %}
-    <div
-      class="masonry-item card bg-base-200 shadow-lg hover:shadow-2xl transition-all duration-300"
-    >
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for post in posts %}
+    <div class="card bg-base-200 shadow-lg hover:shadow-2xl transition-all duration-300">
       <a href="{% url 'post_detail' slug=post.slug %}">
         <figure>
           {% if post.cover_image %}
@@ -31,19 +28,27 @@
           </p>
           <p>{{ post.body|truncatewords:30 }}</p>
           <div class="card-actions justify-end">
-            <a
-              href="{% url 'post_detail' slug=post.slug %}"
-              class="btn btn-accent"
-              >Read More</a
-            >
+            <a href="{% url 'post_detail' slug=post.slug %}" class="btn btn-accent">Read More</a>
           </div>
         </div>
       </a>
     </div>
-
-    {% endif %} {% empty %}
-    <p class="text-center col-span-3">No posts available.</p>
     {% endfor %}
+  </div>
+  <div class="flex justify-center mt-4">
+    <span class="btn-group">
+      {% if posts.has_previous %}
+      <a href="?page={{ posts.previous_page_number }}" class="btn">Previous</a>
+      {% else %}
+      <button class="btn" disabled>Previous</button>
+      {% endif %}
+      <span class="btn">Page {{ posts.number }} of {{ posts.paginator.num_pages }}</span>
+      {% if posts.has_next %}
+      <a href="?page={{ posts.next_page_number }}" class="btn">Next</a>
+      {% else %}
+      <button class="btn" disabled>Next</button>
+      {% endif %}
+    </span>
   </div>
 </div>
 {% endblock %}
