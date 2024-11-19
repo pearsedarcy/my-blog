@@ -44,3 +44,4 @@ class Comment(models.Model):
         return self.approved
     approved_status.boolean = True
     approved_status.short_description = 'Approved'
+

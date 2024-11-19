@@ -1,5 +1,10 @@
-{% extends "blog/base.html" %} {% block title %}{{ post.title }}{% endblock %}
+
+{% extends "blog/base.html" %} 
+{% block title %}
+{{ post.title }}
+{% endblock %}
 {% block content %}
+{% load static %}
 <div class="container mx-auto px-2 py-8">
   <div class="card bg-base-300 shadow-xl mb-8">
     <div class="card-body">
@@ -15,9 +20,18 @@
           class="w-full h-auto object-cover mb-4"
         />
       </div>
+      {% else %}
+      <div class="py-4">
+        <img
+          src="{% static 'images/default_cover_image.jpg' %}"
+          alt="Default cover image"
+          class="w-full h-auto object-cover mb-4"
+        />
+      </div>
       {% endif %}
       <div class="py-4">
-        <p>{{ post.body }}</p>
+        <p>{{ post.body | safe }}</p>
+      </div>
       </div>
       {% if post.author == user %}
       <div class="card-actions justify-end mt-4">

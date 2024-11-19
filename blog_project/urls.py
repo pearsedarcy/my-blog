@@ -29,6 +29,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.post_list, name="post_list"),
     path("add-post/", views.add_post, name="add_post"),
+    path("users/", include("users.urls")),
     path("<slug:slug>/", views.post_detail, name="post_detail"),
     path("post/<slug:slug>/", views.post_detail, name="post_detail"),
     path("comment/<int:comment_id>/edit/", views.edit_comment, name="edit_comment"),
