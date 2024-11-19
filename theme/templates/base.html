@@ -35,12 +35,15 @@
                     >Add Post</a
                   >
                 </li>
+
                 {% else %}
                 <li>
                   <a href="{% url 'admin:login' %}" class="btn btn-secondary"
                     >Login</a
                   >
                 </li>
+
+
                 {% endif %}
               </ul>
             </div>
@@ -67,6 +70,7 @@
                     >Profile</a
                   >
                 </li>
+                
                 <li>
                   <form action="{% url 'admin:logout' %}" method="post">
                     {% csrf_token %}
@@ -75,11 +79,25 @@
                     </button>
                   </form>
                 </li>
+                <li>
+                  <form action="{% url 'account_logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary w-full">Log Out
+                    All auth</button>
+                  </form>
+                </li>
                 {% else %}
                 <li>
                   <a href="{% url 'admin:login' %}" class="btn btn-accent">
                     Login
                   </a>
+                </li>                <li>
+                  <a href="{% url 'account_signup' %}" class="btn
+                  btn-secondary">Sign Up all auth</a>
+                </li>
+                <li>
+                  <a href="{% url 'account_login' %}" class="btn
+                  btn-secondary">Login All Auth</a>
                 </li>
                 {% endif %}
               </ul>

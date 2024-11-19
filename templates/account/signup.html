@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="card w-full max-w-md shadow-lg bg-white" style="max-width: 400px;">
+        <div class="card-body">
+            <h2 class="card-title text-center">{% trans "Sign Up" %}</h2>
+            <form method="post" action="{% url 'account_signup' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="form-control mt-6">
+                    <button type="submit" class="btn btn-primary w-full">{% trans "Sign Up" %}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
