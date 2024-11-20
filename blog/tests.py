@@ -1,5 +1,8 @@
 import os
-from django.test import TestCase
+from django.test import TestCase, Client
+from django.urls import reverse
+from .models import Post
+from .forms import PostForm
 
 class EnvironmentVariableTest(TestCase):
     def test_env_variable(self):
@@ -19,6 +22,7 @@ class DebugEnvironmentVariableTest(TestCase):
             print(f"Environment variable 'DEBUG' is set to: {env_var}")
         else:
             print("Environment variable 'DEBUG' not found")
+
 
 
 class CloudinaryEnvironmentVariableTest(TestCase):
