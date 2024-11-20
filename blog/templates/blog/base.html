@@ -1,14 +1,20 @@
+<!-- Load static files and Tailwind CSS tags -->
 {% load static tailwind_tags %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <script>
+  // Retrieve theme from localStorage or default to 'default'
   const theme = localStorage.getItem('theme') || 'default';
   document.documentElement.setAttribute('data-theme', theme);
 </script>
   <head>
+    <!-- Meta tags and title -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}My Django Blog{% endblock %}</title>
+    <!-- Add the skateboard emoji as the favicon -->
+    <link rel="icon" href="{% static 'images/skateboard_emoji.png' %}" />
     {% tailwind_css %}
   </head>
   <body class="bg-base-100 text-base-content min-h-screen font-sans">
@@ -128,7 +134,7 @@
           </svg>
           <input
             type="checkbox"
-            value="synthwave"
+            value=""
             class="toggle theme-controller"
           />
           <svg
@@ -247,5 +253,6 @@
       </footer>
     </div>
   </body>
+  <!-- Include theme toggle script -->
   <script src="{% static 'js/theme-toggle.js' %}"></script>
 </html>
