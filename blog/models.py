@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -12,7 +13,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
     exerpt = models.TextField(max_length=100, default="", blank=True)
-    cover_image = models.ImageField(upload_to="cover_images/", blank=True, null=True)
+    cover_image = CloudinaryField('image', blank=True, null=True)
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     published = models.BooleanField(default=True)

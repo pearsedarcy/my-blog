@@ -19,3 +19,14 @@ class DebugEnvironmentVariableTest(TestCase):
             print(f"Environment variable 'DEBUG' is set to: {env_var}")
         else:
             print("Environment variable 'DEBUG' not found")
+
+
+class CloudinaryEnvironmentVariableTest(TestCase):
+    def test_cloudinary_env_variable(self):
+        env_var = os.getenv('CLOUDINARY_URL')
+        self.assertIsNotNone(env_var, "Environment variable 'CLOUDINARY_URL' is not set")
+        if env_var:
+            print(f"Environment variable 'CLOUDINARY_URL' is set to: {env_var}")
+        else:
+            print("Environment variable 'CLOUDINARY_URL' not found")
+            

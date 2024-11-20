@@ -14,6 +14,7 @@ import sys
 from pathlib import Path
 import dj_database_url
 import environ
+
 env = environ.Env()
 env.read_env()
 
@@ -28,8 +29,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = env('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG', default=False)
+DEBUG = env.bool('DEBUG', default=False)
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['.herokuapp.com', '.pearse.dev', '127.0.0.1'])
 ALLOWED_HOSTS = ['.herokuapp.com', '.pearse.dev', '127.0.0.1' ]
 
 
@@ -51,6 +52,8 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     'django.contrib.sites',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -137,6 +140,17 @@ USE_I18N = True
 
 USE_TZ = True
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': env('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': env('CLOUDINARY_API_KEY'),
+    'API_SECRET': env('CLOUDINARY_API_SECRET'),
+}
+
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
@@ -145,8 +159,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [BASE_DIR / "theme/static"]  # Add other paths as needed
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -171,7 +183,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 CSRF_COOKIE_SAMESITE = 'Lax'  # Or 'Strict'
 SESSION_COOKIE_SAMESITE = 'Lax'  # Or 'Strict'
 
-CSRF_TRUSTED_ORIGINS = ['https://*.herokuapp.com', 'https://*.pearse.dev', 'http://127.0.0.1']
+CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=['https://*.herokuapp.com', 'https://*.pearse.dev', 'http://127.0.0.1'])
 
 CSRF_COOKIE_SECURE = not DEBUG
 SESSION_COOKIE_SECURE = not DEBUG
@@ -194,3 +206,19 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
+
+
