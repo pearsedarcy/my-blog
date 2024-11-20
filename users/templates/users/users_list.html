@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 <div class="p-6 bg-white rounded-lg shadow-md">
@@ -6,9 +7,15 @@
     <div class="space-y-4">
         {% for profile in profiles %}
         <div class="card lg:card-side bg-base-100 shadow-xl">
+            {% if profile.profile_picture %}
             <figure>
                 <img src="{{ profile.profile_picture.url }}" alt="{{ profile.user.username }}'s profile picture" class="w-24 h-24 rounded-full">
             </figure>
+            {% else %}
+            <figure>
+                <img src="{% static 'images/default_profile_picture.jpg' %}" alt="Default profile picture" class="w-24 h-24 rounded-full">
+            </figure>
+            {% endif %}
             <div class="card-body">
                 <h2 class="card-title">{{ profile.user.username }}</h2>
                 <p>{{ profile.bio }}</p>

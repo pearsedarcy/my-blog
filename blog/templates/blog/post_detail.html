@@ -1,4 +1,3 @@
-
 {% extends "blog/base.html" %} 
 {% block title %}
 {{ post.title }}
@@ -8,10 +7,6 @@
 <div class="container mx-auto px-2 py-8">
   <div class="card bg-base-300 shadow-xl mb-8">
     <div class="card-body">
-      <h1 class="text-3xl font-semibold mb-4">{{ post.title }}</h1>
-      <p class="text-sm text-neutral-500">
-        {{ post.created|date:"F j, Y" }} by {{ post.author }}
-      </p>
       {% if post.cover_image %}
       <div class="py-4">
         <img
@@ -21,7 +16,7 @@
         />
       </div>
       {% else %}
-      <div class="py-4">
+      <div>
         <img
           src="{% static 'images/default_cover_image.jpg' %}"
           alt="Default cover image"
@@ -29,9 +24,13 @@
         />
       </div>
       {% endif %}
+      <h1 class="text-3xl font-semibold mb-4">{{ post.title }}</h1>
+      <p class="text-sm text-neutral-500">
+        {{ post.created|date:"F j, Y" }} by {{ post.author }}
+      </p>
+
       <div class="py-4">
         <p>{{ post.body | safe }}</p>
-      </div>
       </div>
       {% if post.author == user %}
       <div class="card-actions justify-end mt-4">
@@ -42,23 +41,29 @@
           >Delete</a
         >
       </div>
+    </div>
       {% endif %}
     </div>
   </div>
 
   <!-- Comments Section -->
-  <div class="mb-8">
+  <div class="container mx-auto px-2 py-8">
     <h3 class="text-xl font-semibold mb-4">Comments</h3>
-    {% for comment in comments %} {% if comment.approved %}
-    <div class="card bg-base-300 shadow-lg p-2 mb-4">
+    {% for comment in comments %}
+
+    
+    <div class="card bg-base-300 shadow-lg mb-4">
       <div class="card-body">
-        <p><strong>{{ comment.author.username }}</strong> said:</p>
+        <p><strong>{{ comment.author.username|title }}</strong> said:</p>
         <p>{{ comment.body }}</p>
         <p class="text-sm text-neutral-500">
           {{ comment.created|date:"F j, Y" }}
         </p>
-
+        {% if not comment.approved %}
+        <p class="text-sm text-yellow-500">Waiting for comment to be approved</p>
+        {% endif %}
         {% if comment.author == user %}
+        
         <div class="card-actions justify-end mt-4">
           <a
             href="{% url 'edit_comment' comment.id %}"
@@ -74,14 +79,12 @@
         {% endif %}
       </div>
     </div>
-    {% endif %} {% empty %}
-    <p class="text-center text-neutral-600">No comments yet.</p>
     {% endfor %}
   </div>
 
   <!-- Comment Form -->
   {% if user.is_authenticated %}
-  <div class="mb-8">
+  <div class="container mx-auto px-2 py-2">
     <h3 class="text-xl font-semibold mb-4">Leave a Comment</h3>
     <form method="POST" class="space-y-4">
       {% csrf_token %} {{ form.as_p }}

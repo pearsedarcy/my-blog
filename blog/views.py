@@ -4,8 +4,6 @@ from .models import Post, Comment
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.paginator import Paginator
-
-# views.py
 from .forms import CommentForm, PostForm
 
 
@@ -20,7 +18,10 @@ def post_list(request):
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    comments = post.comments.all()
+    comments = post.comments.filter(approved=True)
+    if request.user.is_authenticated:
+        user_comments = post.comments.filter(author=request.user)
+        comments = comments | user_comments
 
     if request.method == "POST":
         form = CommentForm(request.POST)
