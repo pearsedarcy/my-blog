@@ -1,6 +1,6 @@
 from django import forms
 from .models import Comment, Post
-
+from cloudinary.forms import CloudinaryFileField
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -49,7 +49,7 @@ class PostForm(forms.ModelForm):
         ),
         label="",
     )
-    cover_image = forms.ImageField(
+    cover_image = CloudinaryFileField(
         required=False,
         widget=forms.ClearableFileInput(
             attrs={

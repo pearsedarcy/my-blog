@@ -9,6 +9,15 @@ from .forms import CommentForm, PostForm
 
 # Create your views here.
 def post_list(request):
+    """
+    Display a list of posts with pagination.
+    
+    Args:
+        request: The HTTP request object.
+    
+    Returns:
+        Rendered HTML page with a list of posts.
+    """
     posts_list = Post.objects.all()
     paginator = Paginator(posts_list, 6)  # Show 6 posts per page
     page_number = request.GET.get('page')
@@ -17,6 +26,16 @@ def post_list(request):
 
 
 def post_detail(request, slug):
+    """
+    Display the details of a single post, including comments.
+    
+    Args:
+        request: The HTTP request object.
+        slug: The slug of the post.
+    
+    Returns:
+        Rendered HTML page with post details and comments.
+    """
     post = get_object_or_404(Post, slug=slug)
     comments = post.comments.filter(approved=True)
     if request.user.is_authenticated:
@@ -48,6 +67,16 @@ def post_detail(request, slug):
 
 @login_required
 def edit_comment(request, comment_id):
+    """
+    Edit an existing comment.
+    
+    Args:
+        request: The HTTP request object.
+        comment_id: The ID of the comment to edit.
+    
+    Returns:
+        Rendered HTML page with the comment edit form.
+    """
     comment = get_object_or_404(Comment, id=comment_id)
 
     # Ensure the user is the comment author
@@ -67,6 +96,16 @@ def edit_comment(request, comment_id):
 
 @login_required
 def delete_comment(request, comment_id):
+    """
+    Delete an existing comment.
+    
+    Args:
+        request: The HTTP request object.
+        comment_id: The ID of the comment to delete.
+    
+    Returns:
+        Redirect to the post detail page after deletion.
+    """
     comment = get_object_or_404(Comment, id=comment_id)
 
     # Ensure the user is the comment author
@@ -79,6 +118,15 @@ def delete_comment(request, comment_id):
 
 
 def loginView(request):
+    """
+    Handle user login.
+    
+    Args:
+        request: The HTTP request object.
+    
+    Returns:
+        Rendered HTML page with the login form.
+    """
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -92,6 +140,15 @@ def loginView(request):
 
 @login_required
 def add_post(request):
+    """
+    Add a new post.
+    
+    Args:
+        request: The HTTP request object.
+    
+    Returns:
+        Rendered HTML page with the post creation form.
+    """
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
@@ -108,6 +165,16 @@ def add_post(request):
 
 @login_required
 def edit_post(request, post_id):
+    """
+    Edit an existing post.
+    
+    Args:
+        request: The HTTP request object.
+        post_id: The ID of the post to edit.
+    
+    Returns:
+        Rendered HTML page with the post edit form.
+    """
     post = get_object_or_404(Post, id=post_id)
 
     # Ensure the user is the post author
@@ -127,6 +194,16 @@ def edit_post(request, post_id):
 
 @login_required
 def delete_post(request, post_id):
+    """
+    Delete an existing post.
+    
+    Args:
+        request: The HTTP request object.
+        post_id: The ID of the post to delete.
+    
+    Returns:
+        Redirect to the post list page after deletion.
+    """
     post = get_object_or_404(Post, id=post_id)
 
     # Ensure the user is the post author

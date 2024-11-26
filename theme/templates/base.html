@@ -20,7 +20,12 @@
                 width="140px"
               />
             </a>
+            <div class="flex-none">
+              <a href="{% url 'post_list' %}" class="btn btn-primary">Blog</a>
+              <a href="{% url 'event_list' %}" class="btn btn-primary">Events</a>
+            </div>
           </div>
+          
           <div class="flex-none gap-2">
             <a href="{% url 'users_list' %}" class="btn btn-secondary">Users</a>
             <div class="dropdown dropdown-end">
@@ -62,7 +67,8 @@
               </div>
               <ul
                 tabindex="0"
-                class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1]
+              mt-3 w-52 p-2 shadow gap-2"
               >
                 {% if user.is_authenticated %}
                 <li>
@@ -70,34 +76,21 @@
                     >Profile</a
                   >
                 </li>
-                
                 <li>
-                  <form action="{% url 'admin:logout' %}" method="post">
+                  <form class="btn btn-primary w-full" action="{% url 'account_logout' %}" method="post">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-secondary w-full">
-                      Log Out
+                    <button type="submit" >Log Out
                     </button>
                   </form>
                 </li>
-                <li>
-                  <form action="{% url 'account_logout' %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-primary w-full">Log Out
-                    All auth</button>
-                  </form>
-                </li>
-                {% else %}
-                <li>
-                  <a href="{% url 'admin:login' %}" class="btn btn-accent">
-                    Login
-                  </a>
-                </li>                <li>
-                  <a href="{% url 'account_signup' %}" class="btn
-                  btn-secondary">Sign Up all auth</a>
-                </li>
+                {% else %}     
                 <li>
                   <a href="{% url 'account_login' %}" class="btn
-                  btn-secondary">Login All Auth</a>
+                  btn-secondary">Login</a>
+                </li>        
+                <li>
+                  <a href="{% url 'account_signup' %}" class="btn
+                  btn-secondary">Sign Up</a>
                 </li>
                 {% endif %}
               </ul>

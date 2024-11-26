@@ -27,6 +27,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("events/", include("events.urls")),
     path('accounts/', include('allauth.urls')),
     path("", views.post_list, name="post_list"),
     path("add-post/", views.add_post, name="add_post"),
@@ -43,6 +44,7 @@ urlpatterns = [
     # path("profile/", views.ProfileView.as_view(), name="profile"),
     # path("logout/", views.LogoutView.as_view(), name="logout"),
     path("summernote/", include("django_summernote.urls")),
+    
 ]
 
 

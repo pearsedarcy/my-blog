@@ -15,11 +15,13 @@ from pathlib import Path
 import dj_database_url
 import environ
 
-env = environ.Env()
-env.read_env()
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))  # Ensure this line is present and correct
+
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,11 +29,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY', default='your-default-secret-key')
 
 DEBUG = env.bool('DEBUG', default=False)
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['.herokuapp.com', '.pearse.dev', '127.0.0.1'])
-ALLOWED_HOSTS = ['.herokuapp.com', '.pearse.dev', '127.0.0.1' ]
 
 
 # Application definition
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'cloudinary',
     'cloudinary_storage',
+    'events',
 ]
 
 MIDDLEWARE = [
@@ -220,5 +222,7 @@ LOGGING = {
         'level': 'DEBUG',
     },
 }
+
+
 
 
